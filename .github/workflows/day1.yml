@@ -1,0 +1,37 @@
+name: Manual Trigger Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Greet everyone in day1'
+        required: true
+        default: 'World'
+      environment:
+        description: 'Environment to deploy to'
+        required: false
+        default: 'development'
+        type: choice
+        options:
+          - development
+          - staging
+          - production
+
+jobs:
+  manual-job:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Display inputs
+        run: |
+          echo "Hello ${{ github.event.inputs.name }}!"
+          echo "Environment: ${{ github.event.inputs.environment }}"
+      
+      - name: Run custom script
+        run: |
+          echo "Running workflow triggered at: $(date)"
+          echo "Triggered by: ${{ github.actor }}"
+          echo "Branch: ${{ github.ref }}"

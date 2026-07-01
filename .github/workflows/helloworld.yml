@@ -1,0 +1,24 @@
+name: helloworld
+run-name: ${{ github.event.head_commit.message }}
+on:
+    workflow_dispatch:
+        inputs:
+            name:
+                description: "provide input variable name"
+                required: true
+                default: "world!,welocme to github actions"
+    pull_request:
+        branches:
+            - main
+            - feature/*
+        paths:
+            - 'src/**'
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v7
+
+            - name: Print Hello World
+              run: echo "Hello ${{ github.event.inputs.name }}"

@@ -1,0 +1,6 @@
+# Python cache files
+src/__pycache__/
+src/_pycache__/
+tests/__pycache__/
+tests/_pycache__/
+*.py[cod]

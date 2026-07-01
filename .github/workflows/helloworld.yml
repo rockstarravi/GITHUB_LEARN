@@ -9,7 +9,7 @@ on:
                 default: "world!,welocme to github actions"
     pull_request:
         branches:
-            - main
+            - main    #if i mention main here it will trigger the workflow if i directly pushed to main branch evnthough pr is not raised
             - feature/*
         paths:
             - 'src/**'
@@ -20,5 +20,7 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v7
 
-            - name: Print Hello World
-              run: echo "Hello ${{ github.event.inputs.name }}"
+            - name: Print GitHub event inputs
+              run: |
+                echo "GitHub event inputs:"
+                echo '${{ toJson(github.event.inputs) }}'

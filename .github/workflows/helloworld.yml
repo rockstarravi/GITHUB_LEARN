@@ -16,6 +16,8 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
+        env:
+            INPUT_NAME: ${{ github.event.inputs.name || 'world' }}
         steps:
             - name: Checkout code
               uses: actions/checkout@v7
@@ -23,4 +25,5 @@ jobs:
             - name: Print GitHub event inputs
               run: |
                 echo "GitHub event inputs:"
-                echo '${{ toJson(github.event.inputs) }}'
+                echo "Input name: $INPUT_NAME"
+                echo '${{ toJson(github.event.inputs || {}) }}'
